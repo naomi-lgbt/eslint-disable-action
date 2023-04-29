@@ -32,11 +32,18 @@ const getFiles = async (path: string): Promise<string[]> => {
       for (const file of fileNames) {
         const text = await readFile(file, "utf8");
         if (/eslint-disable/.test(text)) {
+          const lines = text.split(/\r?\n/g);
+          const matchedLines = lines.filter((line) =>
+            /eslint-disable/.test(line)
+          );
           const fileName = file.replace(process.cwd() + "/", "");
           failed = true;
-          console.error(
-            `::error file=${fileName}::File ${fileName} contains a disable directive.`
-          );
+          for (const line of matchedLines) {
+            const lineNumber = lines.indexOf(line) + 1;
+            console.error(
+              `::error file=${fileName},line=${lineNumber}::Found a disable directive at ${file}:${lineNumber}`
+            );
+          }
         }
       }
     }
