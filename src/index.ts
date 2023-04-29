@@ -20,7 +20,8 @@ const getFiles = async (path: string): Promise<string[]> => {
 
 (async () => {
   try {
-    const rawArray = getInput("directories");
+    const rawArray = getInput("directories", { required: true });
+    console.log(rawArray);
     const array = JSON.parse(rawArray);
     let failed = false;
 

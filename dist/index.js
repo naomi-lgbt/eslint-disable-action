@@ -2738,7 +2738,8 @@ const getFiles = (path) => __awaiter(void 0, void 0, void 0, function* () {
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const rawArray = (0, core_1.getInput)("directories");
+        const rawArray = (0, core_1.getInput)("directories", { required: true });
+        console.log(rawArray);
         const array = JSON.parse(rawArray);
         let failed = false;
         for (const path of array) {
