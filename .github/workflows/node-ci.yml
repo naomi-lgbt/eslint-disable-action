@@ -31,7 +31,7 @@ jobs:
       - name: Check for eslint-disable
         uses: naomi-lgbt/eslint-disable-action@main
         with:
-          directories: ["src"]
+          directories: "src"
 
       - name: Lint Source Files
         run: npm run lint

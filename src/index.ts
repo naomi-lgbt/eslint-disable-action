@@ -20,9 +20,11 @@ const getFiles = async (path: string): Promise<string[]> => {
 
 (async () => {
   try {
-    const rawArray = getInput("directories", { required: true });
-    console.log(rawArray);
-    const array = JSON.parse(rawArray);
+    const rawInput = getInput("directories", { required: true });
+    console.log(
+      `::notice::Checking ${rawInput} directories for disable directives.`
+    );
+    const array = rawInput.split(/\s+/g);
     let failed = false;
 
     for (const path of array) {

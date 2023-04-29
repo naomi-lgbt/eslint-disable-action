@@ -2738,9 +2738,9 @@ const getFiles = (path) => __awaiter(void 0, void 0, void 0, function* () {
 });
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const rawArray = (0, core_1.getInput)("directories", { required: true });
-        console.log(rawArray);
-        const array = JSON.parse(rawArray);
+        const rawInput = (0, core_1.getInput)("directories", { required: true });
+        console.log(`::notice::Checking ${rawInput} directories for disable directives.`);
+        const array = rawInput.split(/\s+/g);
         let failed = false;
         for (const path of array) {
             const fileNames = yield getFiles((0, path_1.join)(process.cwd(), path));
