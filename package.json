@@ -1,6 +1,6 @@
 {
   "name": "eslint-disable-action",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An action to detect eslint-disable directives in your code.",
   "main": "prod/index.js",
   "scripts": {
