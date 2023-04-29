@@ -1,0 +1,9 @@
+name: 'No ESLint Disable Directives'
+description: 'Validates that there are no eslint-disable directives in your code.'
+inputs:
+  directories:
+    description: "Which directories to check - this should be an array."
+    required: true
+runs:
+  using: 'node16'
+  main: 'index.js'
