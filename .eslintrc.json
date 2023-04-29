@@ -1,0 +1,6 @@
+{
+  "extends": "@nhcarrigan",
+  "rules": {
+    "no-console": "off"
+  }
+}
