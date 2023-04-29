@@ -1,20 +1,58 @@
-# New Repository Template
+# Eslint Disable Action
 
-This template contains all of our basic files for a new GitHub repository. There is also a handy workflow that will create an issue on a new repository made from this template, with a checklist for the steps we usually take in setting up a new repository.
+This is a basic GitHub Action that checks specified directories for `eslint-disable` comments and fails the run if any are found.
 
-If you're starting a Node.JS project with TypeScript, we have a [specific template](https://github.com/naomi-lgbt/nodejs-typescript-template) for that purpose.
+## Usage
 
-## Readme
+To use this action, create a workflow file in your repository's `.github/workflows` directory. An example workflow file is provided below.
 
-Delete all of the above text (including this line), and uncomment the below text to use our standard readme template.
+```yml
+name: Node.js CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
-<!-- # Project Name
+jobs:
+  ci:
+    name: Lint / Build / Test
+    runs-on: ubuntu-20.04
 
-Project Description
+    strategy:
+      matrix:
+        node-version: [18.x]
 
-## Live Version
+    steps:
+      - name: Checkout Source Files
+        uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3
 
-This page is currently deployed. [View the live website.]
+      - name: Use Node.js v${{ matrix.node-version }}
+        uses: actions/setup-node@64ed1c7eab4cce3362f8c340dee64e5eaeef8f7c # v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Check for eslint-disable
+        uses: naomi-lgbt/eslint-disable-action@main
+        with:
+          directories: "src test"
+
+      - name: Lint Source Files
+        run: npm run lint
+
+      - name: Verify Build
+        run: npm run build
+
+      - name: Run Tests
+        run: npm run test
+```
+
+The `directories` input should be a list of file paths to check for `eslint-disable` comments. Paths should be **space separated**.
 
 ## Feedback and Bugs
 
@@ -30,7 +68,7 @@ Before interacting with our community, please read our [Code of Conduct](CODE_OF
 
 ## Licensing
 
-Copyright (C) 2022 Naomi Carrigan
+Copyright (C) 2023 Naomi Carrigan
 
 This Source Code Form is subject to the terms of the Mozilla Public
 License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -40,4 +78,4 @@ The full license terms may be viewed in the [LICENSE.md file](./LICENSE.md)
 
 ## Contact
 
-We may be contacted through our [Chat Server](http://chat.nhcarrigan.com) or via email at `contact@nhcarrigan.com`. -->
+We may be contacted through our [Chat Server](http://chat.nhcarrigan.com) or via email at `contact@nhcarrigan.com`.
