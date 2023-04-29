@@ -2,9 +2,12 @@
   "name": "eslint-disable-action",
   "version": "0.0.1",
   "description": "An action to detect eslint-disable directives in your code.",
-  "main": "index.js",
+  "main": "prod/index.js",
   "scripts": {
+    "build": "tsc",
     "lint": "eslint index.js --max-warnings 0",
+    "package": "ncc build src/index.ts -o dist",
+    "start": "node prod/index.js",
     "test": "echo 'no tests yet'"
   },
   "keywords": [
@@ -16,5 +19,15 @@
   "license": "MPL-2.0",
   "dependencies": {
     "@actions/core": "1.10.0"
+  },
+  "devDependencies": {
+    "@nhcarrigan/eslint-config": "1.1.1",
+    "@nhcarrigan/prettier-config": "1.0.1",
+    "@nhcarrigan/typescript-config": "1.0.1",
+    "@types/node": "18.16.2",
+    "@vercel/ncc": "0.36.1",
+    "eslint": "8.39.0",
+    "prettier": "2.8.8",
+    "typescript": "5.0.4"
   }
 }
