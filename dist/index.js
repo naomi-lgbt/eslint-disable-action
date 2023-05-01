@@ -2736,9 +2736,13 @@ const getFiles = (path) => __awaiter(void 0, void 0, void 0, function* () {
     }
     return fileNames;
 });
+const formatLineLog = (fileName, line, message, fail) => fail
+    ? `::error file=${fileName},line=${line}::${message}`
+    : `::warning file=${fileName},line=${line}::${message}`;
 (() => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const rawInput = (0, core_1.getInput)("directories", { required: true });
+        const failMode = (0, core_1.getBooleanInput)("fail-mode", { required: false });
         console.log(`::notice::Checking ${rawInput} directories for disable directives.`);
         const array = rawInput.split(/\s+/g);
         let failed = false;
@@ -2753,12 +2757,12 @@ const getFiles = (path) => __awaiter(void 0, void 0, void 0, function* () {
                     failed = true;
                     for (const line of matchedLines) {
                         const lineNumber = lines.indexOf(line) + 1;
-                        console.error(`::error file=${fileName},line=${lineNumber}::Found a disable directive at ${file}:${lineNumber}`);
+                        console.error(formatLineLog(fileName, lineNumber, `Found a disable directive at ${file}:${lineNumber}`, failMode));
                     }
                 }
             }
         }
-        if (failed) {
+        if (failed && failMode) {
             (0, core_1.setFailed)(`::error::One or more files contain a disable directive.`);
             return;
         }
