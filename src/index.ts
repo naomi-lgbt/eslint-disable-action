@@ -1,7 +1,7 @@
 import { readdir, stat, readFile } from "fs/promises";
 import { join } from "path";
 
-import { getInput, setFailed } from "@actions/core";
+import { getInput, getBooleanInput, setFailed } from "@actions/core";
 
 const getFiles = async (path: string): Promise<string[]> => {
   const fileNames: string[] = [];
@@ -18,9 +18,20 @@ const getFiles = async (path: string): Promise<string[]> => {
   return fileNames;
 };
 
+const formatLineLog = (
+  fileName: string,
+  line: number,
+  message: string,
+  fail: boolean
+) =>
+  fail
+    ? `::error file=${fileName},line=${line}::${message}`
+    : `::warning file=${fileName},line=${line}::${message}`;
+
 (async () => {
   try {
     const rawInput = getInput("directories", { required: true });
+    const failMode = getBooleanInput("fail-mode", { required: false });
     console.log(
       `::notice::Checking ${rawInput} directories for disable directives.`
     );
@@ -41,14 +52,19 @@ const getFiles = async (path: string): Promise<string[]> => {
           for (const line of matchedLines) {
             const lineNumber = lines.indexOf(line) + 1;
             console.error(
-              `::error file=${fileName},line=${lineNumber}::Found a disable directive at ${file}:${lineNumber}`
+              formatLineLog(
+                fileName,
+                lineNumber,
+                `Found a disable directive at ${file}:${lineNumber}`,
+                failMode
+              )
             );
           }
         }
       }
     }
 
-    if (failed) {
+    if (failed && failMode) {
       setFailed(`::error::One or more files contain a disable directive.`);
       return;
     }

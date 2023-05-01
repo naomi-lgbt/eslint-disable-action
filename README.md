@@ -54,6 +54,18 @@ jobs:
 
 The `directories` input should be a list of file paths to check for `eslint-disable` comments. Paths should be **space separated**.
 
+## Fail Mode
+
+By default, the action will log errors and set a failed status if `eslint-disable` directives are found. If you'd rather see warnings and no failure status, set the `fail-mode` input to `false`.
+
+```yml
+      - name: Check for eslint-disable
+        uses: naomi-lgbt/eslint-disable-action@main
+        with:
+          directories: "src test"
+          fail-mode: false
+```
+
 ## Feedback and Bugs
 
 If you have feedback or a bug report, please feel free to open a GitHub issue!
