@@ -21,7 +21,7 @@
     "@actions/core": "1.10.0"
   },
   "devDependencies": {
-    "@nhcarrigan/eslint-config": "1.1.1",
+    "@nhcarrigan/eslint-config": "1.1.2",
     "@nhcarrigan/prettier-config": "1.0.1",
     "@nhcarrigan/typescript-config": "1.0.1",
     "@types/node": "18.16.3",
