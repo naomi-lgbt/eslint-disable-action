@@ -10,6 +10,10 @@
     "start": "node prod/index.js",
     "test": "echo 'no tests yet'"
   },
+  "engines": {
+    "node": "18",
+    "pnpm": "8"
+  },
   "keywords": [
     "eslint",
     "github",
