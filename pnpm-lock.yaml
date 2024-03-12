@@ -20,8 +20,8 @@ devDependencies:
     specifier: 1.0.1
     version: 1.0.1(typescript@5.4.2)
   '@types/node':
-    specifier: 18.19.22
-    version: 18.19.22
+    specifier: 18.19.23
+    version: 18.19.23
   '@vercel/ncc':
     specifier: 0.38.1
     version: 0.38.1
@@ -187,8 +187,8 @@ packages:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: true
 
-  /@types/node@18.19.22:
-    resolution: {integrity: sha512-p3pDIfuMg/aXBmhkyanPshdfJuX5c5+bQjYLIikPLXAUycEogij/c50n/C+8XOA5L93cU4ZRXtn+dNQGi0IZqQ==}
+  /@types/node@18.19.23:
+    resolution: {integrity: sha512-wtE3d0OUfNKtZYAqZb8HAWGxxXsImJcPUAgZNw+dWFxO6s5tIwIjyKnY76tsTatsNCLJPkVYwUpq15D38ng9Aw==}
     dependencies:
       undici-types: 5.26.5
     dev: true
