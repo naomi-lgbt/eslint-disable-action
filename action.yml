@@ -1,0 +1,16 @@
+name: 'No ESLint Disable Directives'
+description: 'Validates that there are no eslint-disable directives in your code.'
+branding:
+  icon: "alert-octagon"
+  color: "purple"
+inputs:
+  directories:
+    description: "Which directories to check - this should be an array."
+    required: true
+  fail-mode:
+    description: "Whether the action should throw errors and fail, or just emit warnings."
+    required: false
+    default: true
+runs:
+  using: 'node16'
+  main: 'dist/index.js'

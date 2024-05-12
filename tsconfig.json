@@ -1,0 +1,8 @@
+{
+  "extends": "@nhcarrigan/typescript-config",
+  "compilerOptions": {
+    "rootDir": "./src",
+    "outDir": "./prod",
+    "module": "CommonJS"
+  }
+}
